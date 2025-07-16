@@ -17,7 +17,7 @@ namespace APP.Eds
         
         public MainPage()
         {
-
+            //comentario random
             _clientId = Configuration.KeycloakCliendId;
             _realm = Configuration.KeycloakRealms;
       
