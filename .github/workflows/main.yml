@@ -67,7 +67,7 @@ jobs:
         run: dotnet publish APP.Eds/APP.Eds/APP.Eds.csproj -c Release -f net8.0-windows10.0.19041.0 --no-restore
 
       - name: Upload Windows Artifact
-        uses: actions/upload-artifact@v3.1.0
+        uses: actions/upload-artifact@v4
         with:
           name: mauibeach-windows-ci-build
           path: APP.Eds/APP.Eds/bin/Release/net8.0-windows10.0.19041.0/win10-x64/AppPackages/APP.Eds*/APP.Eds*.msix
