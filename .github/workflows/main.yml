@@ -43,3 +43,31 @@ jobs:
         with:
           name: app.eds-android-ci-build
           path: APP.Eds/APP.Eds/bin/Release/net8.0-android/*Signed.a*
+
+# MAUI Windows Build
+  build-windows:
+    runs-on: windows-2022
+    name: Windows Build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Install MAUI Workload
+        run: dotnet workload install maui --ignore-failed-sources
+
+      - name: Restore Dependencies
+        run: dotnet restore APP.Eds/APP.Eds/APP.Eds.csproj --runtime win-x64
+
+      - name: Build MAUI Windows
+        run: dotnet publish APP.Eds/APP.Eds/APP.Eds.csproj -c Release -f net8.0-windows10.0.19041.0 --no-restore
+
+      - name: Upload Windows Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mauibeach-windows-ci-build
+          path: APP.Eds/APP.Eds/bin/Release/net8.0-windows10.0.19041.0/win10-x64/AppPackages/APP.Eds*/APP.Eds*.msix
