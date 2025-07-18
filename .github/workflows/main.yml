@@ -39,7 +39,7 @@ jobs:
         run: dotnet build APP.Eds/APP.Eds/APP.Eds.csproj --no-restore -c Release -f net8.0-windows10.0.19041.0 -r win-x64
 
       - name: Run Unit Tests
-        run: dotnet test --no-build --verbosity normal
+        run: dotnet test APP.Eds/APP.Eds.sln --no-build --verbosity normal
 
 # Chequeo Calidad Software (cambiar a SONAR_TOKEN cuando integre cambios al repo real)
   sonar:
