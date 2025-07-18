@@ -94,6 +94,15 @@ jobs:
     steps:
       - name: Placeholder Step
         run: echo "Este job está reservado para las futuras pruebas con Appium."
+
+# Carga del apk a amazon S3
+  amazon-emulator:
+    needs: [build-and-test,build-android,appium-tests]
+    runs-on: macos-latest
+    name: Upload Artifact to Amazon S3 (Placeholder)
+    steps:
+      - name: Placeholder Step
+        run: echo "Este job está reservado para las futuras envios a S3."
         
 # MAUI Windows Build
   build-windows:
