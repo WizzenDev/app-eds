@@ -16,8 +16,50 @@ env:
   DOTNET_CLI_TELEMETRY_OPTOUT: true       # Disable sending .NET CLI telemetry
 
 jobs:
+# General Build
+  build-and-test:
+    runs-on: windows-2022
+    name: General Build and Test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Install MAUI Workload
+        run: dotnet workload install maui --ignore-failed-sources
+
+      - name: Restore Dependencies
+        run: dotnet restore APP.Eds/APP.Eds/APP.Eds.csproj
+
+      - name: Build
+        run: dotnet build APP.Eds/APP.Eds/APP.Eds.csproj --no-restore -c Release
+
+      - name: Run Unit Tests
+        run: dotnet test --no-build --verbosity normal
+
+# Chequeo Calidad Software (cambiar a SONAR_TOKEN cuando integre cambios al repo real)
+  sonar:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        with:
+          args: >
+            -Dsonar.projectKey=PoliedroSoftware_app-eds
+            -Dsonar.organization=poliedro-software-sonarqube
+        env:
+          SONAR_TOKEN_FORK_DILAN: ${{ secrets.SONAR_TOKEN_FORK_DILAN }}
 # MAUI Android Build
   build-android:
+    needs: build-and-test
     runs-on: windows-2022
     name: Android Build
     steps:
@@ -43,9 +85,19 @@ jobs:
         with:
           name: app.eds-android-ci-build
           path: APP.Eds/APP.Eds/bin/Release/net8.0-android/*Signed.a*
-
+          
+# Pruebas automatizadas en appium
+  appium-tests:
+    needs: [build-and-test,build-android]
+    runs-on: macos-latest
+    name: Appium E2E Tests (Placeholder)
+    steps:
+      - name: Placeholder Step
+        run: echo "Este job está reservado para las futuras pruebas con Appium."
+        
 # MAUI Windows Build
   build-windows:
+    needs: build-and-test
     runs-on: windows-2022
     name: Windows Build
     steps:
