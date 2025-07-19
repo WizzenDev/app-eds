@@ -56,7 +56,7 @@ jobs:
             -Dsonar.projectKey=PoliedroSoftware_app-eds
             -Dsonar.organization=poliedro-software-sonarqube
         env:
-          SONAR_TOKEN_FORK_DILAN: ${{ secrets.SONAR_TOKEN_FORK_DILAN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FORK_DILAN }}
 # MAUI Android Build
   build-android:
     needs: build-and-test
