@@ -125,7 +125,7 @@ jobs:
         run: dotnet restore APP.Eds/APP.Eds/APP.Eds.csproj --runtime win-x64
 
       - name: Build MAUI Windows
-        run: dotnet publish APP.Eds/APP.Eds/APP.Eds.csproj -c Release -f net8.0-windows10.0.19041.0 --no-restore
+        run: dotnet publish APP.Eds/APP.Eds/APP.Eds.csproj -c Release -f net8.0-windows10.0.19041.0 --no-restore --pack
 
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@v4
