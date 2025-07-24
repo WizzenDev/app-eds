@@ -36,6 +36,14 @@ jobs:
           key: ${{ runner.os }}-dotnet-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
             ${{ runner.os }}-dotnet-
+
+      - name: Cache MAUI Workloads (Windows)
+        uses: actions/cache@v3
+        with:
+          path: ~/.dotnet
+          key: ${{ runner.os }}-maui-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-maui-
             
       - name: Install MAUI Workload
         run: dotnet workload install maui --ignore-failed-sources
@@ -86,6 +94,14 @@ jobs:
           key: ${{ runner.os }}-android-dotnet-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
             ${{ runner.os }}-android-dotnet-
+
+      - name: Cache MAUI Workloads (Windows)
+        uses: actions/cache@v3
+        with:
+          path: ~/.dotnet
+          key: ${{ runner.os }}-maui-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-maui-
             
       - name: Install MAUI Workload
         run: dotnet workload install maui --ignore-failed-sources
@@ -141,6 +157,14 @@ jobs:
           key: ${{ runner.os }}-windows-dotnet-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
             ${{ runner.os }}-windows-dotnet-
+
+      - name: Cache MAUI Workloads (Windows)
+        uses: actions/cache@v3
+        with:
+          path: ~/.dotnet
+          key: ${{ runner.os }}-maui-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-maui-
             
       - name: Install MAUI Workload
         run: dotnet workload install maui --ignore-failed-sources
