@@ -157,9 +157,13 @@ jobs:
           name: app-eds-windows-ci-build
           path: APP.Eds/APP.Eds/bin/Release/net8.0-windows10.0.19041.0/win10-x64/AppPackages/*.exe
           
-      - name: Buscar directorio
-        run: dir APP.Eds\bin\Release\net8.0-windows10.0.19041.0\win10-x64\
-             dir APP.Eds\bin\Release\net8.0-windows10.0.19041.0\win10-x64\ApPackages\
+      - name: List files in output directory
+        run: |
+          echo "Listing files in net8.0-windows10.0.19041.0\win10-x64"
+          dir APP.Eds\bin\Release\net8.0-windows10.0.19041.0\win10-x64\*
+    
+          echo "Listing files in net8.0-windows10.0.19041.0\win10-x64\AppPackages"
+          dir APP.Eds\bin\Release\net8.0-windows10.0.19041.0\win10-x64\AppPackages\*
 
 
 # Pruebas automatizadas en appium
