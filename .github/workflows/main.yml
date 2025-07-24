@@ -179,15 +179,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-eds-windows-ci-build
-          path: APP.Eds/APP.Eds/bin/Release/net8.0-windows10.0.19041.0/win10-x64/AppPackages/*.msix
-
-      - name: Obtener ruta del .msix
-        id: encontrar_msix
-        run: echo "msix_path=$(find . -name '*.msix' | head -n 1)" >> $GITHUB_OUTPUT
-
-      - name: Usar la ruta encontrada
-        run: echo "Archivo MSIX ubicado en: ${{ steps.encontrar_msix.outputs.msix_path }}"
-
+          path: APP.Eds/APP.Eds/bin/Release/net8.0-windows10.0.19041.0/win10-x64/AppPackages/APP.Eds_0.0.1.0_Test/*.msix
 
 # Pruebas automatizadas en appium
   appium-tests-windows:
