@@ -181,16 +181,12 @@ jobs:
           name: app-eds-windows-ci-build
           path: APP.Eds/APP.Eds/bin/Release/net8.0-windows10.0.19041.0/win10-x64/AppPackages/*.msix
 
-      - name: List files in output directory
-        run: |
-          echo "Listing files in net8.0-windows10.0.19041.0\win10-x64"
-          dir APP.Eds\bin\Release\net8.0-windows10.0.19041.0\win10-x64\
-    
-          echo "Listing files in net8.0-windows10.0.19041.0\win10-x64\AppPackages"
-          dir APP.Eds\bin\Release\net8.0-windows10.0.19041.0\win10-x64\AppPackages\
-    
-          echo "Listing all files in AppPackages (using wildcard)"
-          dir APP.Eds\bin\Release\net8.0-windows10.0.19041.0\win10-x64\AppPackages\*.*
+      - name: Obtener ruta del .msix
+        id: encontrar_msix
+        run: echo "msix_path=$(find . -name '*.msix' | head -n 1)" >> $GITHUB_OUTPUT
+
+      - name: Usar la ruta encontrada
+        run: echo "Archivo MSIX ubicado en: ${{ steps.encontrar_msix.outputs.msix_path }}"
 
 
 # Pruebas automatizadas en appium
