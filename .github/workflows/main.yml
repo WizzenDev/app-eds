@@ -179,7 +179,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-eds-windows-ci-build
-          path: APP.Eds/APP.Eds/bin/Release/net8.0-windows10.0.19041.0/win10-x64/AppPackages/APP.Eds_0.0.1.0_Test/*.msix
+          path: APP.Eds/APP.Eds/bin/Release/net8.0-windows10.0.19041.0/win-x64/AppPackages/APP.Eds_0.0.1.0_Test/*.msix
 
 # Pruebas automatizadas en appium
   appium-tests-windows:
