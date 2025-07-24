@@ -133,8 +133,25 @@ jobs:
     runs-on: ubuntu-latest
     name: Upload Artifact to Amazon S3 (Placeholder)
     steps:
-      - name: Placeholder Step
-        run: echo "Este job está reservado para las futuras envios a S3."
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Download Android Artifact  # Descargar el artifact desde el job 'build-android'
+        uses: actions/download-artifact@v2  # Descarga el artifact subido en el job 'build-android'
+        with:
+          name: app.eds-android-ci-build  # Nombre del artifact a descargar
+          path: ./downloaded-artifacts  # Carpeta donde se guardará el artifact descargado
+
+      - name: Upload APK to S3
+        run: |
+          aws s3 cp ./downloaded-artifacts/*Signed.apk s3://${{ secrets.S3_BUCKET_NAME }}/android/${{ github.sha }}-app.apk --acl private
         
 # MAUI Windows Build
   build-windows:
