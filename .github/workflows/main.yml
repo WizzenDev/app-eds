@@ -70,7 +70,15 @@ jobs:
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: 8.0.x
-
+          
+      - name: Cache .NET dependencies (Android)
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-android-dotnet-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-android-dotnet-
+            
       - name: Install MAUI Workload
         run: dotnet workload install maui --ignore-failed-sources
 
@@ -118,6 +126,14 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
+      - name: Cache .NET dependencies (Windows)
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-windows-dotnet-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-windows-dotnet-
+            
       - name: Install MAUI Workload
         run: dotnet workload install maui --ignore-failed-sources
 
