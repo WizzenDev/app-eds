@@ -179,15 +179,18 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-eds-windows-ci-build
-          path: APP.Eds/APP.Eds/bin/Release/net8.0-windows10.0.19041.0/win10-x64/AppPackages/*.exe
-          
+          path: APP.Eds/APP.Eds/bin/Release/net8.0-windows10.0.19041.0/win10-x64/AppPackages/*.msix
+
       - name: List files in output directory
         run: |
           echo "Listing files in net8.0-windows10.0.19041.0\win10-x64"
-          dir APP.Eds\bin\Release\net8.0-windows10.0.19041.0\win10-x64\*
+          dir APP.Eds\bin\Release\net8.0-windows10.0.19041.0\win10-x64\
     
           echo "Listing files in net8.0-windows10.0.19041.0\win10-x64\AppPackages"
-          dir APP.Eds\bin\Release\net8.0-windows10.0.19041.0\win10-x64\AppPackages\*
+          dir APP.Eds\bin\Release\net8.0-windows10.0.19041.0\win10-x64\AppPackages\
+    
+          echo "Listing all files in AppPackages (using wildcard)"
+          dir APP.Eds\bin\Release\net8.0-windows10.0.19041.0\win10-x64\AppPackages\*.*
 
 
 # Pruebas automatizadas en appium
