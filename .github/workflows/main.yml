@@ -29,6 +29,14 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
+      - name: Cache .NET dependencies (General)
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-dotnet-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-dotnet-
+            
       - name: Install MAUI Workload
         run: dotnet workload install maui --ignore-failed-sources
 
