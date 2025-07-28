@@ -160,7 +160,7 @@ jobs:
           fi
           NEW_APK_NAME="App-Eds-${TIMESTAMP}.apk"
           mv "$APK_FILE" "./downloaded-artifacts/$NEW_APK_NAME"
-          aws s3 cp "./downloaded-artifacts/$NEW_APK_NAME" s3://${{ secrets.S3_BUCKET_NAME }}/android/${NEW_APK_NAME} --acl public
+          aws s3 cp "./downloaded-artifacts/$NEW_APK_NAME" s3://${{ secrets.S3_BUCKET_NAME }}/android/${NEW_APK_NAME} --acl public-read
         
 # MAUI Windows Build
   build-windows:
