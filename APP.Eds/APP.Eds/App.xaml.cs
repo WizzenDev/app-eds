@@ -6,6 +6,7 @@ namespace APP.Eds;
 
 public partial class App : Application
 {
+//comentario para prueba de pipeline 
     public App()
     {
         InitializeComponent();
